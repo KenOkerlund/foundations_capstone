@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatsumaki Discs</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div>
+        <img src="https://drive.google.com/uc?export=view&id=1RIx6CuLpdMD5BaFcdBtj6j6gfYw2NniR" id='logo' alt="logo">
+        </div>
+        <nav>
+            <button id="all">All Discs</button>
+            <button id="putters">Putters</button>
+            <button id="midrange">Midrange</button>
+            <button id="fairway">Fairway Drivers</button>
+            <button id="distance">Distance Drivers</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="gallery">
+
+        </section>
+
+        <aside id="slide">
+            <div id="toggle"></div>
+                <h1>New Disc</h1>
+                <div id="disc-info">
+                    <form id="the-form">
+                        <input type="text" id="new-image" placeholder="Image URL" required>
+                        <input type="text" id="new-manufacturer" placeholder="Manufacturer" required>
+                        <input type="text" id="new-name" placeholder="Disc Name" required>
+                        <input type="text" id="new-type" placeholder="Disc Type" required>
+                        <input type="text" id="new-color" placeholder="Disc Color" required>
+                        <input type="text" id="new-speed" placeholder="Speed" required>
+                        <input type="text" id="new-glide" placeholder="Glide" required>
+                        <input type="text" id="new-turn" placeholder="Turn" required>
+                        <input type="text" id="new-fade" placeholder="Fade" required>
+                        <button type="submit" id="submit-btn">Submit</button>
+                    </form>
+                </div>
+        </aside>
+    </main>
+
+    <footer>
+        <p>TATSUMAKI DISCS</p>
+        <img src="https://drive.google.com/uc?export=view&id=1DnJFSIfG-uz1hIEdfH6WxR070CEo2UGx" id='footer-logo'alt="cage-logo">
+    </footer>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

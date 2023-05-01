@@ -1,0 +1,109 @@
+require('dotenv').config();
+const {CONNECTION_STRING} = process.env;
+const Sequelize = require("sequelize");
+
+const sequelize = new Sequelize(CONNECTION_STRING, {
+    dialect: "postgres",
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false
+        }
+    }
+});
+
+function seed(req, res) {
+    sequelize.query(`
+    drop table if exists user_discs;
+    drop table if exists discs;
+	drop table if exists users;
+
+	create table discs (
+		disc_id SERIAL PRIMARY KEY,
+		image_url VARCHAR,
+		manufacturer VARCHAR,
+		name VARCHAR,
+		type VARCHAR,
+		color VARCHAR,
+		speed INT,
+		glide INT,
+		turn DECIMAL,
+		fade DECIMAL
+	);
+
+	create table users (
+		user_id SERIAL PRIMARY KEY,
+		user_name VARCHAR,
+		password VARCHAR
+	);
+
+	create table user_discs (
+		id SERIAL,
+		user_id INT,
+		disc_id INT,
+		quantity INT,
+		PRIMARY KEY (id),
+		FOREIGN KEY (user_id) REFERENCES users(user_id),
+		FOREIGN KEY (disc_id) REFERENCES discs(disc_id)
+	);
+
+
+	insert into discs(image_url, manufacturer, name, type, color, speed, glide, turn, fade)
+	VALUES 
+('https://drive.google.com/uc?export=view&id=1IhrDcA8VXxxyfKuMZb5iH3lhYhq57LJP', 'Dynamic Discs', 'Escape', 'Fairway Driver', 'Orange', 9, 5, -.5, 2),
+('https://drive.google.com/uc?export=view&id=1t-QygA6oMgw9MR4RQAXPR-0y90gYzLIt', 'Dynamic Discs', 'Judge', 'Putter', 'Blue', 2, 4, 0, 1),
+('https://drive.google.com/uc?export=view&id=143PYEuMiUfFAhpPGFyHy3CdIFjRYNsQr', 'Dynamic Discs', 'Maverick', 'Fairway Driver', 'Blue', 7, 4, -1.5, 2),
+('https://drive.google.com/uc?export=view&id=17W9FuF3QwhE90OE4p4QP0t4YsUJlPdRB', 'Dynamic Discs', 'Sheriff', 'Distance Driver', 'Orange', 13, 5, -1, 2),
+('https://drive.google.com/uc?export=view&id=1meNpT4NqsSjhfNoKKrmcx4SFciwI3Gkv', 'Dynamic Discs', 'Trespass', 'Distance Driver', 'Orange', 12, 5, -.5, 3),
+('https://drive.google.com/uc?export=view&id=1UWGbKgbug8B8jWnGsh0EiKJ9cv91BRxp', 'Dynamic Discs', 'Truth', 'Midrange', 'Grey', 5, 5, -1, 1),
+('https://drive.google.com/uc?export=view&id=1DZFUKnKQpGwy65cCSUXYDRtomDOKZABm', 'Innova', 'Aviar-x', 'Putter', 'Pink', 2, 3, 0, 2),
+('https://drive.google.com/uc?export=view&id=1PXm3v0s6GXFycsQM7B5c68nky5CP9BRE', 'Innova', 'Roadrunner', 'Distance Driver', 'Orange', 9, 5, -4, 1),
+('https://drive.google.com/uc?export=view&id=1h4noOVGj4xfq11SjKoqBolim_VA14r-g', 'Innova', 'ROC', 'Midrange', 'Pink', 4, 4, 0, 3),
+('https://drive.google.com/uc?export=view&id=1aak4FDyF5A33p33Si41gWq4_kGvr5gsc', 'Innova', 'Tee-Bird', 'Fairway Driver', 'Orange', 7, 5, 0, 2),
+('https://drive.google.com/uc?export=view&id=1e73LQK068tUX01BifYGEQiCJ-hFrTEMg', 'Innova', 'Valkyrie', 'Distance Driver', 'Blue', 9, 4, -2, 2),
+('https://drive.google.com/uc?export=view&id=1mKRCpE9p4ulPnA_ckplEYxoL8tUFwuoU', 'Latitude 64', 'Compass', 'Midrange', 'Yellow', 5, 5, 0, 1),
+('https://drive.google.com/uc?export=view&id=1z9LnXxv87p7dvG6nBybw3o5gJym_jEi4', 'Latitude 64', 'Fuse', 'Midrange', 'Blue', 5, 6, -1, 0),
+('https://drive.google.com/uc?export=view&id=1P2QMA1ZPKkoHIjo8fNlzQt2-53vUkOie', 'Latitude 64', 'Saint', 'Fairway Driver', 'Red', 9, 7, -1, 2);
+
+`).then(() => {
+        console.log('DB SEEDED')
+        res.sendStatus(200)
+    }).catch(err => console.log('Error seeding the DB', err));
+};
+
+function getDiscs(req, res) {
+    sequelize.query(`SELECT * FROM DISCS ORDER BY type desc, speed, glide, turn, fade;`)
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err));
+};
+
+function deleteDisc(req, res) {
+	const {id} = req.params;
+	sequelize.query(`DELETE FROM DISCS
+	WHERE disc_id = ${id};`)
+	.then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+};
+
+function addDisc(req, res) {
+	const {newImage, newManufacturer, newName, newType, newColor, newSpeed, newGlide, newTurn, newFade} = req.body;
+		sequelize.query(`INSERT INTO discs (image_url, manufacturer, name, type, color, speed, glide, turn, fade)
+		VALUES ('${newImage}', '${newManufacturer}', '${newName}', '${newType}', '${newColor}', ${newSpeed}, ${newGlide}, ${newTurn}, ${newFade});`)
+		.then(dbRes => res.status(200).send(dbRes[0]))
+		.catch(err => console.log(err))
+}
+
+function sortDisc(req, res) {
+	const { type } = req.params;
+	console.log(type)
+	sequelize.query(`SELECT * FROM discs WHERE type = '${type}' ORDER BY speed, glide, turn, fade;`)
+	.then(dbRes => res.status(200).send(dbRes[0]))
+	.catch(err => console.log(err));
+}
+
+module.exports = {
+    seed,
+    getDiscs,
+	deleteDisc,
+	addDisc,
+	sortDisc
+}

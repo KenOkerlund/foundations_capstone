@@ -1,0 +1,266 @@
+html, body{
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 50px 0px 100px 10px;
+    height: 10vh;
+}
+
+#logo {
+    width: 500px;
+    height: 500px;
+}
+
+header div {
+    display: flex;
+    height: 100px;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+header h1 {
+    font-size: 45px;
+}
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #216869;
+    height: 40px;
+    color: white;
+    gap: 25px;
+    margin-top: auto;
+}
+
+#footer-logo {
+    height: 40px;
+    width: 30px;
+    padding: 0px 40px 0px 0px;
+}
+
+#gif{
+    height: 100px;
+    width: 100px;
+    mix-blend-mode: color-burn;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 45px;
+    margin-right: 70px;
+}
+
+nav button {
+    border: 2px solid #9CC5A1;
+    width: 125px;
+    height: 25px;
+    border-radius: 50px;
+    color: #49A078;
+    background-color: white;
+    text-decoration: underline #9CC5A1;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background-color: #9CC5A1;
+    border: 2px solid #49A078;
+    transform: scale(1.1);
+    color: white;
+    text-decoration: underline white;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 150px;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+.gallery-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    box-shadow: 3px 3px 7px #ADD6B2;
+    height: 400px;
+    width: 325px;
+    border: 1px solid #DCE1DE;
+    color: #1F2421;
+    font-weight: 900;
+}
+
+.gallery-card .delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.gallery-title {
+    color: white;
+    font-weight: 1000;
+    background-color: #216869;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+}
+
+.gallery-image:hover {
+    transform: rotate(360deg);
+    transition: 1s;
+}
+
+.speed-rating, .glide-rating, .turn-rating, .fade-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+
+.gallery-rating {
+    display: flex;
+    gap: 20px;
+}
+
+#slide {
+    position: fixed;
+    top: 55%;
+    right: -425px;
+    transform: translateY(-50%);
+    transition-duration: .5s;
+    background-color: #9cc5a1;
+    width: 350px;
+    padding: 20px 50px 20px 25px;
+    color: #1F2421;
+}
+
+#slide.active {
+    right: 0;
+    transition-duration: .5s;
+}
+
+#slide h1{
+    font-size: 40px;
+}
+
+#toggle {
+    position: absolute;
+    height: 48px;
+    width: 48px;
+    background-color: #216869;
+    top: 0;
+    left: -48px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 48px;
+}
+
+
+#toggle:before {
+    content: '+';
+    color: #DCE1DE;
+    font-size: 50px;
+}
+
+#toggle.active:before {
+    content: '-';
+    color: #DCE1DE;
+    font-size: 50px;
+}
+
+#slide h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3c4d6b;
+    font-weight: 500;
+}
+
+#disc-info input {
+    width: 100%;
+    height: 30px;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1F2421;
+    background-color: #DCE1DE;
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 rgba(0,0,0,0.8);
+    border: 2px solid #e6ecef;
+}
+
+#disc-info button {
+    width: 150px;
+    background-color: #dce1de;
+    margin: 0 auto;
+    display: block;
+    height: 50px;
+    color: #1F2421;
+    border-radius: 30px;
+    padding: 10px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    border-color: rgba(255,255,255,0.1);
+}
+
+#disc-info button:hover {
+    color: #dce1de;
+    background-color: #49a078;
+}
+
+button:focus {
+    outline: none;
+}
+
+.delete-btn {
+    opacity: .5;
+    background-color: #49a078;
+    border: 1px solid #49a078;
+    color: #dce1de;
+}
+
+.delete-btn:disabled {
+    background-color: grey;
+}
+
+.delete-btn:hover {
+    background-color: #216869;
+    transform: scale(1.1);
+}

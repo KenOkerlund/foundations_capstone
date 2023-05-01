@@ -1,0 +1,6 @@
+MVP List - 
+
+1. See all discs
+2. Sort discs by type
+3. Add a new disc
+4. Delete a disc
